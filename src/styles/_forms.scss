@@ -1,0 +1,15 @@
+@use "./_buttons.scss";
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.32rem;
+
+  & input[type="submit"] {
+    @include buttons.primary-button;
+
+    &:hover {
+      @include buttons.primary-button-hover;
+    }
+  }
+}

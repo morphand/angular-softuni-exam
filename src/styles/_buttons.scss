@@ -1,0 +1,19 @@
+$primaryButtonShade: hsl(189, 100%, 35%);
+$secondaryButtonShade: hsl(0, 0%, 100%);
+
+@mixin primary-button {
+  border: none;
+  background: $primaryButtonShade;
+  color: $secondaryButtonShade;
+  font-weight: bold;
+  padding: 0.12rem;
+  border-radius: 0.32rem;
+  border: 0.12rem solid $secondaryButtonShade;
+}
+
+@mixin primary-button-hover {
+  cursor: pointer;
+  background: $secondaryButtonShade;
+  color: $primaryButtonShade;
+  border: 0.12rem solid $primaryButtonShade;
+}
