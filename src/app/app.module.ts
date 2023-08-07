@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/navbar/navbar.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -16,6 +17,7 @@ import { NavbarComponent } from './core/navbar/navbar.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],
