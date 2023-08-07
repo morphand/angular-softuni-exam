@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
     StoreModule.forRoot({}, {}),
     CoreModule,
     SharedModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
