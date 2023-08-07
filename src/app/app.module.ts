@@ -7,11 +7,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './core/navbar/navbar.component';
-import { FooterComponent } from './core/footer/footer.component';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, FooterComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -19,6 +19,8 @@ import { FooterComponent } from './core/footer/footer.component';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({}, {}),
+    CoreModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
