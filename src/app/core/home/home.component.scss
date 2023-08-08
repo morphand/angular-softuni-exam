@@ -245,20 +245,29 @@ button {
     align-items: center;
     margin: 6rem;
 
-      & > #contacts-left {
+    & > #contacts-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      color: hsl(0, 0%, 100%);
+
+      & > #contacts-left-phone,
+      & > #contacts-left-address {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
-        color: hsl(0, 0%, 100%);
-    
-        & > #contacts-left-phone,
-        & > #contacts-left-address {
-          display: flex;
-          flex-direction: column;
+      }
+
+      & > #contacts-left-social-icons {
+        display: flex;
+        gap: 0.32rem;
+
+        & img {
+          width: 1rem;
+          height: 1rem;
         }
+      }
     }
   }
-
 }
 
 .yellow {
