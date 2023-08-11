@@ -28,4 +28,9 @@ export class AuthService {
   isTokenAvailable() {
     return Boolean(this.getToken());
   }
+
+  removeToken() {
+    localStorage.removeItem('auth');
+    return !this.isTokenAvailable();
+  }
 }
