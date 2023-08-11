@@ -5,10 +5,14 @@
   </ul>
   <ul class="right">
     <!-- Logged out navigation -->
-    <li><a routerLink="/login">Login</a></li>
-    <li><a routerLink="/register">Register</a></li>
+    <ng-template [ngIf]="!isUserLoggedIn" [ngIfElse]="loggedInNavigation">
+      <li><a routerLink="/login">Login</a></li>
+      <li><a routerLink="/register">Register</a></li>
+    </ng-template>
     <!-- Logged in navigation -->
-    <li><a routerLink="/profile">Profile</a></li>
-    <li><a routerLink="/logout">Logout</a></li>
+    <ng-template #loggedInNavigation>
+      <li><a routerLink="/profile">Profile</a></li>
+      <li><a routerLink="/logout">Logout</a></li>
+    </ng-template>
   </ul>
 </nav>
