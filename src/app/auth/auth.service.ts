@@ -9,9 +9,9 @@ import { API_URL, LOGIN_ENDPOINT } from 'src/utils/constants';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  requestLogin(email: String | null, password: String | null) {
+  requestLogin(username: String | null, password: String | null) {
     return this.http.post<LoginResult>(`${API_URL}${LOGIN_ENDPOINT}`, {
-      username: email,
+      username: username,
       password: password,
     });
   }
