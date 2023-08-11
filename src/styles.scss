@@ -1,4 +1,4 @@
-@use '/src/styles/forms.scss';
+@use "/src/styles/forms.scss";
 
 * {
   margin: 0;
@@ -19,5 +19,12 @@ main {
   gap: 1rem;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: hsl(0, 0%, 15%);
+}
