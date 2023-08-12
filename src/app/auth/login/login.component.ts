@@ -6,12 +6,15 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../auth.service';
 
 import { login } from '../auth.actions';
@@ -28,6 +31,7 @@ import { login } from '../auth.actions';
     MatFormFieldModule,
     MatButtonModule,
     NgIf,
+    MatSnackBarModule,
   ],
 })
 export class LoginComponent {
@@ -38,7 +42,9 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private store: Store<{ auth: string }>
+    private store: Store<{ auth: string }>,
+    private router: Router,
+    private matSnackBar: MatSnackBar
   ) {
     this.auth$ = this.store.select('auth');
   }
@@ -66,16 +72,28 @@ export class LoginComponent {
       .subscribe({
         next: (res) => {
           this.isLoading = false;
-          console.log(res);
 
           if (res.success) {
+            this.authService.setToken(res.value.token);
             this.store.dispatch(login());
+            this.router.navigate(['/']);
           } else {
-            // TODO: Error handler.
+            if (res.errors.length > 0) {
+              this.matSnackBar.open(res.errors.join(' '), '', {
+                duration: 3000,
+              });
+            } else {
+              this.matSnackBar.open('Error when logging in.', '', {
+                duration: 3000,
+              });
+            }
             console.error(res.errors);
           }
         },
         error: (err) => {
+          this.matSnackBar.open(err.message, '', {
+            duration: 3000,
+          });
           console.error(err);
           this.isLoading = false;
         },
