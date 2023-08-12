@@ -14,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
 
 import { authReducer } from './auth/auth.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { httpInterceptorProviders } from './app.interceptors';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserAnimationsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
