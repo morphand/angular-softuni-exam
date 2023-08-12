@@ -1,0 +1,54 @@
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3rem;
+  background-size: cover;
+  height: 100%;
+  width: 100vw;
+  color: hsl(0, 0%, 100%);
+  background: url("/assets/images/pexels-isaac-mitchell-13740080.jpg");
+  background-size: cover;
+  background-position-y: center;
+
+  & .showcase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    padding: 3rem;
+    border: 1px solid hsl(0, 0%, 100%);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    animation: anim 750ms ease-in 0.25s;
+
+    &-left {
+      & img {
+        width: auto;
+        height: 22rem;
+        border-radius: 0.6rem;
+      }
+    }
+
+    &-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      gap: 1rem;
+      border-left: 1px solid hsl(0, 0%, 100%);
+      padding-left: 1rem;
+
+      &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.32rem;
+      }
+
+      &-buttons {
+        & button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

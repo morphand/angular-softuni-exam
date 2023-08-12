@@ -10,10 +10,15 @@ import {
   requiresLoggedInGuard,
   requiresLoggedOutGuard,
 } from './auth/auth.guard';
+import { CatalogDetailsComponent } from './core/catalog-details/catalog-details.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
-  { path: 'catalog', component: CatalogComponent },
+  {
+    path: 'catalog',
+    component: CatalogComponent,
+  },
+  { path: 'catalog/:id', component: CatalogDetailsComponent },
   {
     path: 'login',
     component: LoginComponent,

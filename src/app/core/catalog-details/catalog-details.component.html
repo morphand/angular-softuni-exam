@@ -1,0 +1,41 @@
+<section>
+  <div class="showcase" *ngIf="car" @fadeIn>
+    <div class="showcase-left">
+      <img src="{{ API_URL }}{{ car.imageURL }}" alt="{{ car.model }}" />
+    </div>
+    <div class="showcase-right">
+      <h2 class="showcase-right-heading">{{ car.madeIn }} {{ car.model }}</h2>
+      <div class="showcase-right-content">
+        <p>Model: {{ car.model }}</p>
+        <p>Generation: {{ car.generation }}</p>
+        <p>Class: {{ car.class }}</p>
+        <p>Doors: {{ car.doors }}</p>
+        <p>Fuel: {{ car.powertrain.fuel }}</p>
+        <p>Engine size: {{ car.powertrain.sizeInL }}L</p>
+        <p>
+          Power: {{ car.powertrain.powerOutputInKw }} kW /
+          {{ car.powertrain.powerOutputInHp }} HP
+        </p>
+        <p>
+          Transmission: {{ car.powertrain.transmissionGears }}-speed,
+          {{ car.powertrain.transmissionType }}
+        </p>
+        <p>Length: {{ car.dimensions.lengthInMm }}mm</p>
+        <p>Width: {{ car.dimensions.widthInMm }}mm</p>
+        <p>Height: {{ car.dimensions.heightInMm }}mm</p>
+        <p>Weight: {{ car.dimensions.weightInKg }}Kg</p>
+      </div>
+      <div class="showcase-right-buttons">
+        <button mat-stroked-button *ngIf="isUserLoggedIn">Rent now</button>
+        <button
+          routerLink="/login"
+          mat-stroked-button
+          color="warn"
+          *ngIf="!isUserLoggedIn"
+        >
+          Log in to rent this car
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

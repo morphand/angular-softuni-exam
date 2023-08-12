@@ -40,3 +40,7 @@ type Car = {
 type CatalogResult = Result & {
   value: { cars: Car[] };
 };
+
+type SingleCarResult = Result & {
+  value: { car: Car };
+};

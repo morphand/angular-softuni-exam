@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { CatalogComponent } from './catalog/catalog.component';
+import { CatalogDetailsComponent } from './catalog-details/catalog-details.component';
 
 @NgModule({
   declarations: [NavbarComponent, FooterComponent, HomeComponent],
@@ -18,6 +19,7 @@ import { CatalogComponent } from './catalog/catalog.component';
     MatButtonModule,
     SharedModule,
     CatalogComponent,
+    CatalogDetailsComponent,
   ],
   exports: [NavbarComponent, FooterComponent],
 })
