@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 import {
   FormsModule,
@@ -6,7 +6,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -34,19 +34,26 @@ import { login } from '../auth.actions';
     MatSnackBarModule,
   ],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
   isLoading: boolean = false;
   auth$: Observable<string>;
+  redirectedFromCarId: Car['_id'] | null = null;
 
   constructor(
     private authService: AuthService,
     private store: Store<{ auth: string }>,
     private router: Router,
+    private route: ActivatedRoute,
     private matSnackBar: MatSnackBar
   ) {
     this.auth$ = this.store.select('auth');
+  }
+
+  ngOnInit(): void {
+    this.redirectedFromCarId =
+      this.route.snapshot.params['redirectedFromCarId'];
   }
 
   getUsernameError() {
@@ -65,38 +72,46 @@ export class LoginComponent {
     return this.password.hasError('password') ? 'Invalid password.' : '';
   }
 
+  private loginHandler(res: LoginResult) {
+    this.isLoading = false;
+
+    if (res.success) {
+      this.authService.setToken(res.value.token);
+      this.store.dispatch(login());
+      if (this.redirectedFromCarId) {
+        this.router.navigate(['catalog', this.redirectedFromCarId]);
+      } else {
+        this.router.navigate(['/']);
+      }
+    } else {
+      if (res.errors.length > 0) {
+        this.matSnackBar.open(res.errors.join(' '), '', {
+          duration: 3000,
+        });
+      } else {
+        this.matSnackBar.open('Error when logging in.', '', {
+          duration: 3000,
+        });
+      }
+      console.error(res.errors);
+    }
+  }
+
+  private errorHandler(err: Error) {
+    this.matSnackBar.open(err.message, '', {
+      duration: 3000,
+    });
+    console.error(err);
+    this.isLoading = false;
+  }
+
   login() {
     this.isLoading = true;
     return this.authService
       .requestLogin(this.username.value, this.password.value)
       .subscribe({
-        next: (res) => {
-          this.isLoading = false;
-
-          if (res.success) {
-            this.authService.setToken(res.value.token);
-            this.store.dispatch(login());
-            this.router.navigate(['/']);
-          } else {
-            if (res.errors.length > 0) {
-              this.matSnackBar.open(res.errors.join(' '), '', {
-                duration: 3000,
-              });
-            } else {
-              this.matSnackBar.open('Error when logging in.', '', {
-                duration: 3000,
-              });
-            }
-            console.error(res.errors);
-          }
-        },
-        error: (err) => {
-          this.matSnackBar.open(err.message, '', {
-            duration: 3000,
-          });
-          console.error(err);
-          this.isLoading = false;
-        },
+        next: this.loginHandler.bind(this),
+        error: this.errorHandler.bind(this),
       });
   }
 }

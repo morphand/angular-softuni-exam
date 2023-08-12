@@ -28,7 +28,7 @@
       <div class="showcase-right-buttons">
         <button mat-stroked-button *ngIf="isUserLoggedIn">Rent now</button>
         <button
-          routerLink="/login"
+          [routerLink]="['/login', { redirectedFromCarId: car._id }]"
           mat-stroked-button
           color="warn"
           *ngIf="!isUserLoggedIn"
