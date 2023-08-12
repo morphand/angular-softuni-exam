@@ -6,3 +6,4 @@ export const EMAIL_MIN_LENGTH = 6;
 export const EMAIL_MAX_LENGTH = 256;
 export const API_URL = 'http://localhost:3000';
 export const LOGIN_ENDPOINT = '/login';
+export const CATALOG_ENDPOINT = '/catalog';

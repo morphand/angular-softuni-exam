@@ -8,14 +8,17 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../shared/shared.module';
+import { CatalogComponent } from './catalog/catalog.component';
 
 @NgModule({
-  declarations: [
-    NavbarComponent,
-    FooterComponent,
-    HomeComponent,
+  declarations: [NavbarComponent, FooterComponent, HomeComponent],
+  imports: [
+    CommonModule,
+    AppRoutingModule,
+    MatButtonModule,
+    SharedModule,
+    CatalogComponent,
   ],
-  imports: [CommonModule, AppRoutingModule, MatButtonModule, SharedModule],
   exports: [NavbarComponent, FooterComponent],
 })
 export class CoreModule {}
