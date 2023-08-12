@@ -11,6 +11,8 @@ type LoginResult = Result & {
   };
 };
 
+type RegisterResult = LoginResult;
+
 type JSONWebToken = string;
 
 type Car = {

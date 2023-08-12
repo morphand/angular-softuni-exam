@@ -11,6 +11,7 @@ import {
   requiresLoggedOutGuard,
 } from './auth/auth.guard';
 import { CatalogDetailsComponent } from './core/catalog-details/catalog-details.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -22,6 +23,11 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [requiresLoggedOutGuard],
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
     canActivate: [requiresLoggedOutGuard],
   },
   {

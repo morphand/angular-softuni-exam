@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { API_URL, LOGIN_ENDPOINT } from 'src/utils/constants';
+import {
+  API_URL,
+  LOGIN_ENDPOINT,
+  REGISTER_ENDPOINT,
+} from 'src/utils/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +15,8 @@ export class AuthService {
 
   requestLogin(username: String | null, password: String | null) {
     return this.http.post<LoginResult>(`${API_URL}${LOGIN_ENDPOINT}`, {
-      username: username,
-      password: password,
+      username,
+      password,
     });
   }
 
@@ -32,5 +36,19 @@ export class AuthService {
   removeToken() {
     localStorage.removeItem('auth');
     return !this.isTokenAvailable();
+  }
+
+  requestRegister(
+    username: String | null,
+    password: String | null,
+    repeatPassword: String | null,
+    email: String | null
+  ) {
+    return this.http.post<RegisterResult>(`${API_URL}${REGISTER_ENDPOINT}`, {
+      username,
+      password,
+      repeatPassword,
+      email,
+    });
   }
 }

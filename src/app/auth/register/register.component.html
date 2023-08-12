@@ -1,0 +1,66 @@
+<section>
+  <div class="register">
+    <h2>Register</h2>
+    <form class="register-form" (ngSubmit)="register()">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          type="text"
+          name="register-form-username"
+          id="register-form-username"
+          matInput
+          [formControl]="username"
+          required
+        />
+        <mat-error *ngIf="username.invalid">{{
+          getUsernameError()
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          name="register-form-email"
+          id="register-form-email"
+          matInput
+          [formControl]="email"
+          required
+        />
+        <mat-error *ngIf="email.invalid">{{
+          getEmailError()
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          type="password"
+          name="register-form-password"
+          id="register-form-password"
+          matInput
+          [formControl]="password"
+          required
+        />
+        <mat-error *ngIf="password.invalid">{{
+          getPasswordError()
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Repeat password</mat-label>
+        <input
+          type="password"
+          name="register-form-repeatPassword"
+          id="register-form-repeatPassword"
+          matInput
+          [formControl]="repeatPassword"
+          required
+        />
+        <mat-error *ngIf="repeatPassword.invalid">{{
+          getRepeatPasswordError()
+        }}</mat-error>
+      </mat-form-field>
+      <button mat-flat-button color="primary" [disabled]="isLoading">
+        {{ isLoading ? "Loading..." : "Register" }}
+      </button>
+    </form>
+  </div>
+</section>
