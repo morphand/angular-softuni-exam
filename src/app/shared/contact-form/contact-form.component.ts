@@ -10,6 +10,7 @@ import { NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contact-form',
@@ -23,11 +24,14 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     NgIf,
     MatButtonModule,
+    MatSnackBarModule,
   ],
 })
 export class ContactFormComponent {
   email = new FormControl('', [Validators.required, Validators.email]);
   message = new FormControl('', [Validators.required]);
+
+  constructor(private matSnackBar: MatSnackBar) {}
 
   getEmailError() {
     if (this.email.hasError('required')) {
@@ -43,5 +47,13 @@ export class ContactFormComponent {
     }
 
     return '';
+  }
+
+  sendMessage() {
+    if (!this.email.errors && !this.message.errors) {
+      this.matSnackBar.open('Message sent successfully.', '', {
+        duration: 3000,
+      });
+    }
   }
 }
