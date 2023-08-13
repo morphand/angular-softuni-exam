@@ -38,6 +38,19 @@ export class AuthService {
     return !this.isTokenAvailable();
   }
 
+  setUsername(username: string) {
+    localStorage.setItem('username', username);
+    return this.isUsernameAvailable();
+  }
+
+  isUsernameAvailable() {
+    return Boolean(this.getToken());
+  }
+
+  getUsername() {
+    return localStorage.getItem('username');
+  }
+
   requestRegister(
     username: String | null,
     password: String | null,

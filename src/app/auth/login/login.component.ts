@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
 
     if (res.success) {
       this.authService.setToken(res.value.token);
+      this.authService.setUsername(res.value.username);
       this.store.dispatch(login());
       if (this.redirectedFromCarId) {
         this.router.navigate(['catalog', this.redirectedFromCarId]);

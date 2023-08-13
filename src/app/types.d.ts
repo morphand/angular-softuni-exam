@@ -8,6 +8,7 @@ type Result = {
 type LoginResult = Result & {
   value: {
     token: JSONWebToken;
+    username: string;
   };
 };
 
