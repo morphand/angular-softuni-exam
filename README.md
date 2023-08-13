@@ -14,7 +14,7 @@ This is the part of the application that is accessible to all users.
 
 - Catalog page
 
-  ![Catalog page](src/assets/catalogpage.PNG)
+  ![Catalog page](src/assets/catalogpage.png)
   - This is where the users can see all currently available models, displayed as model cards, containing the car details, as well as a link to the model page.
 
 - Login page
@@ -34,7 +34,7 @@ Each logged in user can interact with the application in more ways than the gues
 
 - Home page
 
-  ![Home page for logged in users](src/assets/homepage-loggedin.PNG)
+  ![Home page for logged in users](src/assets/homepage-loggedin.png)
   - Logged in users see a link to their profile page as well as to the logout link.
 
 - Single model page
