@@ -12,6 +12,7 @@ import {
 } from './auth/auth.guard';
 import { CatalogDetailsComponent } from './core/catalog-details/catalog-details.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ProfileComponent } from './core/profile/profile.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
     component: CatalogComponent,
   },
   { path: 'catalog/:id', component: CatalogDetailsComponent },
+  { path: 'profile', component: ProfileComponent },
   {
     path: 'login',
     component: LoginComponent,

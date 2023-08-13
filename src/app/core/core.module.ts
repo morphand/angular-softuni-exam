@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CatalogDetailsComponent } from './catalog-details/catalog-details.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [NavbarComponent, FooterComponent, HomeComponent],
@@ -20,6 +21,7 @@ import { CatalogDetailsComponent } from './catalog-details/catalog-details.compo
     SharedModule,
     CatalogComponent,
     CatalogDetailsComponent,
+    ProfileComponent,
   ],
   exports: [NavbarComponent, FooterComponent],
 })
