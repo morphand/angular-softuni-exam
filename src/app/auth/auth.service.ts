@@ -51,6 +51,11 @@ export class AuthService {
     return localStorage.getItem('username');
   }
 
+  removeUsername() {
+    localStorage.removeItem('username');
+    return !this.isUsernameAvailable();
+  }
+
   requestRegister(
     username: String | null,
     password: String | null,

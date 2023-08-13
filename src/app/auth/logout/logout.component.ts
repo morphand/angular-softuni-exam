@@ -25,6 +25,7 @@ export class LogoutComponent implements OnInit {
     const isTokenAvailable = this.authService.isTokenAvailable();
     if (isTokenAvailable) {
       this.authService.removeToken();
+      this.authService.removeUsername();
       this.store.dispatch(logout());
     }
     this.router.navigate(['/']);
