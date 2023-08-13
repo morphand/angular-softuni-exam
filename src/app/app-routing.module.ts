@@ -21,7 +21,11 @@ const routes: Routes = [
     component: CatalogComponent,
   },
   { path: 'catalog/:id', component: CatalogDetailsComponent },
-  { path: 'profile', component: ProfileComponent },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [requiresLoggedInGuard],
+  },
   {
     path: 'login',
     component: LoginComponent,
