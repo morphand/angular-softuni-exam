@@ -58,6 +58,9 @@ Each logged in user can interact with the application in more ways than the gues
 - [NGRX](https://ngrx.io/)
 - [SVG Repo](https://www.svgrepo.com/)
 
+## Backend
+The repository for the backend is located [here](https://github.com/morphand/softuni-angular-exam-server).
+
 ## Scripts
 
 ```
