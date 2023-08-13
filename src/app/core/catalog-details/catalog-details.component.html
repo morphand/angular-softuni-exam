@@ -25,10 +25,34 @@
         <p>Height: {{ car.dimensions.heightInMm }}mm</p>
         <p>Weight: {{ car.dimensions.weightInKg }}Kg</p>
       </div>
-      <div class="showcase-right-buttons">
-        <button mat-stroked-button *ngIf="isUserLoggedIn" (click)="rentCar()">
+      <div
+        class="showcase-right-buttons"
+        *ngIf="isUserLoggedIn; then loggedInButtons; else loggedOutButtons"
+      ></div>
+      <ng-template #loggedInButtons>
+        <button
+          *ngIf="!secondaryButtonsVisible"
+          mat-stroked-button
+          (click)="showSecondaryButtons()"
+        >
           Rent now
         </button>
+        <button
+          *ngIf="secondaryButtonsVisible"
+          mat-stroked-button
+          (click)="rentCar()"
+        >
+          Yes
+        </button>
+        <button
+          *ngIf="secondaryButtonsVisible"
+          mat-stroked-button
+          (click)="hideSecondaryButtons()"
+        >
+          No
+        </button>
+      </ng-template>
+      <ng-template #loggedOutButtons>
         <button
           [routerLink]="['/login', { redirectedFromCarId: car._id }]"
           mat-stroked-button
@@ -37,7 +61,7 @@
         >
           Log in to rent this car
         </button>
-      </div>
+      </ng-template>
     </div>
   </div>
 </section>

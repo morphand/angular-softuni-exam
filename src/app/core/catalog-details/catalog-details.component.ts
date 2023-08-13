@@ -35,6 +35,7 @@ export class CatalogDetailsComponent implements OnInit {
   car: Car | null = null;
   API_URL = API_URL;
   carId: string = '';
+  secondaryButtonsVisible: boolean = false;
 
   constructor(
     private catalogService: CatalogService,
@@ -45,14 +46,21 @@ export class CatalogDetailsComponent implements OnInit {
     this.auth$ = this.store.select('auth');
   }
 
+  showSecondaryButtons() {
+    this.secondaryButtonsVisible = true;
+  }
+
+  hideSecondaryButtons() {
+    this.secondaryButtonsVisible = false;
+  }
+
   rentCar() {
     this.catalogService.rentCar(this.carId).subscribe({
       next: (res) => {
-        console.log(res)
         if (!res.success) {
           console.error(res.errors.join(' '));
         } else {
-          console.log(res);
+          this.router.navigate(['/profile']);
         }
       },
     });
