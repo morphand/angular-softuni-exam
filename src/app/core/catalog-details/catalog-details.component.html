@@ -26,7 +26,9 @@
         <p>Weight: {{ car.dimensions.weightInKg }}Kg</p>
       </div>
       <div class="showcase-right-buttons">
-        <button mat-stroked-button *ngIf="isUserLoggedIn">Rent now</button>
+        <button mat-stroked-button *ngIf="isUserLoggedIn" (click)="rentCar()">
+          Rent now
+        </button>
         <button
           [routerLink]="['/login', { redirectedFromCarId: car._id }]"
           mat-stroked-button

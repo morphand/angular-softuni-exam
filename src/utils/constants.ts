@@ -8,4 +8,5 @@ export const API_URL = 'http://localhost:3000';
 export const LOGIN_ENDPOINT = '/login';
 export const REGISTER_ENDPOINT = '/register';
 export const CATALOG_ENDPOINT = '/catalog';
+export const RENT_CAR_ENDPOINT = '/rent';
 export const CATALOG_SINGLE_CAR_ENDPOINT = `${CATALOG_ENDPOINT}/`;

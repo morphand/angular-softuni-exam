@@ -5,6 +5,7 @@ import {
   API_URL,
   CATALOG_ENDPOINT,
   CATALOG_SINGLE_CAR_ENDPOINT,
+  RENT_CAR_ENDPOINT,
 } from 'src/utils/constants';
 
 @Injectable({
@@ -18,6 +19,12 @@ export class CatalogService {
   }
 
   getCarById(carId: string) {
-    return this.http.get<SingleCarResult>(`${API_URL}${CATALOG_SINGLE_CAR_ENDPOINT}${carId}`);
+    return this.http.get<SingleCarResult>(
+      `${API_URL}${CATALOG_SINGLE_CAR_ENDPOINT}${carId}`
+    );
+  }
+
+  rentCar(carId: string) {
+    return this.http.post<Result>(`${API_URL}${RENT_CAR_ENDPOINT}`, { carId });
   }
 }

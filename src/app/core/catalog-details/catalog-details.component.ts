@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
 import { CatalogService } from '../catalog/catalog.service';
 import { API_URL } from 'src/utils/constants';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { animate, style, transition, trigger } from '@angular/animations';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
 const enterTransition = transition(':enter', [
   style({
@@ -34,6 +34,7 @@ export class CatalogDetailsComponent implements OnInit {
   isUserLoggedIn: boolean = false;
   car: Car | null = null;
   API_URL = API_URL;
+  carId: string = '';
 
   constructor(
     private catalogService: CatalogService,
@@ -44,9 +45,22 @@ export class CatalogDetailsComponent implements OnInit {
     this.auth$ = this.store.select('auth');
   }
 
+  rentCar() {
+    this.catalogService.rentCar(this.carId).subscribe({
+      next: (res) => {
+        console.log(res)
+        if (!res.success) {
+          console.error(res.errors.join(' '));
+        } else {
+          console.log(res);
+        }
+      },
+    });
+  }
+
   ngOnInit(): void {
-    const carId = this.route.snapshot.params['id'];
-    this.catalogService.getCarById(carId).subscribe({
+    this.carId = this.route.snapshot.params['id'];
+    this.catalogService.getCarById(this.carId).subscribe({
       next: (res) => {
         if (!res.success) {
           this.router.navigate(['/catalog']);
