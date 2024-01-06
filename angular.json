@@ -66,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-softuni-exam:build:production"
+              "buildTarget": "angular-softuni-exam:build:production"
             },
             "development": {
-              "browserTarget": "angular-softuni-exam:build:development"
+              "buildTarget": "angular-softuni-exam:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +77,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-softuni-exam:build"
+            "buildTarget": "angular-softuni-exam:build"
           }
         },
         "test": {
