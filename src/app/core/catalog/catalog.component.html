@@ -1,31 +1,33 @@
 <section>
   <div class="card-list">
-    <mat-card appearance="outlined" *ngFor="let car of cars">
-      <mat-card-header>
-        <mat-card-title-group>
-          <mat-card-title> {{ car.madeIn }} {{ car.model }} </mat-card-title>
-          <mat-card-subtitle>
-            {{ car.powertrain.sizeInL }}L,
-            {{ car.powertrain.powerOutputInHp }}HP, {{ car.powertrain.fuel }},
-            {{ car.powertrain.transmissionGears }}-speed
-            {{ car.powertrain.transmissionType }} gearbox
-          </mat-card-subtitle>
-          <img
-            src="{{ API_URL }}{{ car.imageURL }}"
-            alt="{{ car.model }}"
-            mat-card-lg-image
-          />
-        </mat-card-title-group>
-      </mat-card-header>
-      <mat-card-content>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque,
-        laudantium!
-      </mat-card-content>
-      <mat-card-actions>
-        <button [routerLink]="['/catalog', car._id]" mat-stroked-button>
-          See more
-        </button>
-      </mat-card-actions>
-    </mat-card>
+    @for (car of cars; track car._id) {
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-card-title-group>
+            <mat-card-title> {{ car.madeIn }} {{ car.model }} </mat-card-title>
+            <mat-card-subtitle>
+              {{ car.powertrain.sizeInL }}L,
+              {{ car.powertrain.powerOutputInHp }}HP, {{ car.powertrain.fuel }},
+              {{ car.powertrain.transmissionGears }}-speed
+              {{ car.powertrain.transmissionType }} gearbox
+            </mat-card-subtitle>
+            <img
+              src="{{ API_URL }}{{ car.imageURL }}"
+              alt="{{ car.model }}"
+              mat-card-lg-image
+            />
+          </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque,
+          laudantium!
+        </mat-card-content>
+        <mat-card-actions>
+          <button [routerLink]="['/catalog', car._id]" mat-stroked-button>
+            See more
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    }
   </div>
 </section>

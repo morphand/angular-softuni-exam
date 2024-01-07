@@ -1,67 +1,55 @@
 <section>
-  <div class="showcase" *ngIf="car" @fadeIn>
-    <div class="showcase-left">
-      <img src="{{ API_URL }}{{ car.imageURL }}" alt="{{ car.model }}" />
-    </div>
-    <div class="showcase-right">
-      <h2 class="showcase-right-heading">{{ car.madeIn }} {{ car.model }}</h2>
-      <div class="showcase-right-content">
-        <p>Model: {{ car.model }}</p>
-        <p>Generation: {{ car.generation }}</p>
-        <p>Class: {{ car.class }}</p>
-        <p>Doors: {{ car.doors }}</p>
-        <p>Fuel: {{ car.powertrain.fuel }}</p>
-        <p>Engine size: {{ car.powertrain.sizeInL }}L</p>
-        <p>
-          Power: {{ car.powertrain.powerOutputInKw }} kW /
-          {{ car.powertrain.powerOutputInHp }} HP
-        </p>
-        <p>
-          Transmission: {{ car.powertrain.transmissionGears }}-speed,
-          {{ car.powertrain.transmissionType }}
-        </p>
-        <p>Length: {{ car.dimensions.lengthInMm }}mm</p>
-        <p>Width: {{ car.dimensions.widthInMm }}mm</p>
-        <p>Height: {{ car.dimensions.heightInMm }}mm</p>
-        <p>Weight: {{ car.dimensions.weightInKg }}Kg</p>
+  @if (car) {
+    <div class="showcase" @fadeIn>
+      <div class="showcase-left">
+        <img src="{{ API_URL }}{{ car.imageURL }}" alt="{{ car.model }}" />
       </div>
-      <div
-        class="showcase-right-buttons"
-        *ngIf="isUserLoggedIn; then loggedInButtons; else loggedOutButtons"
-      ></div>
-      <ng-template #loggedInButtons>
-        <button
-          *ngIf="!secondaryButtonsVisible"
-          mat-stroked-button
-          (click)="showSecondaryButtons()"
-        >
-          Rent now
-        </button>
-        <button
-          *ngIf="secondaryButtonsVisible"
-          mat-stroked-button
-          (click)="rentCar()"
-        >
-          Yes
-        </button>
-        <button
-          *ngIf="secondaryButtonsVisible"
-          mat-stroked-button
-          (click)="hideSecondaryButtons()"
-        >
-          No
-        </button>
-      </ng-template>
-      <ng-template #loggedOutButtons>
-        <button
-          [routerLink]="['/login', { redirectedFromCarId: car._id }]"
-          mat-stroked-button
-          color="warn"
-          *ngIf="!isUserLoggedIn"
-        >
-          Log in to rent this car
-        </button>
-      </ng-template>
+      <div class="showcase-right">
+        <h2 class="showcase-right-heading">{{ car.madeIn }} {{ car.model }}</h2>
+        <div class="showcase-right-content">
+          <p>Model: {{ car.model }}</p>
+          <p>Generation: {{ car.generation }}</p>
+          <p>Class: {{ car.class }}</p>
+          <p>Doors: {{ car.doors }}</p>
+          <p>Fuel: {{ car.powertrain.fuel }}</p>
+          <p>Engine size: {{ car.powertrain.sizeInL }}L</p>
+          <p>
+            Power: {{ car.powertrain.powerOutputInKw }} kW /
+            {{ car.powertrain.powerOutputInHp }} HP
+          </p>
+          <p>
+            Transmission: {{ car.powertrain.transmissionGears }}-speed,
+            {{ car.powertrain.transmissionType }}
+          </p>
+          <p>Length: {{ car.dimensions.lengthInMm }}mm</p>
+          <p>Width: {{ car.dimensions.widthInMm }}mm</p>
+          <p>Height: {{ car.dimensions.heightInMm }}mm</p>
+          <p>Weight: {{ car.dimensions.weightInKg }}Kg</p>
+        </div>
+        <div class="showcase-right-buttons">
+          @if (isUserLoggedIn) {
+            @if (!secondaryButtonsVisible) {
+              <button mat-stroked-button (click)="showSecondaryButtons()">
+                Rent now
+              </button>
+            } @else {
+              <p>Are you sure you want to rent this car?</p>
+              <button mat-stroked-button (click)="rentCar()">Yes</button>
+              <button mat-stroked-button (click)="hideSecondaryButtons()">
+                No
+              </button>
+            }
+          } @else {
+            <button
+              [routerLink]="['/login', { redirectedFromCarId: car._id }]"
+              mat-stroked-button
+              color="warn"
+            >
+              Log in to rent this car
+            </button>
+          }
+        </div>
+      </div>
     </div>
-  </div>
+  }
 </section>
