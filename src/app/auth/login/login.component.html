@@ -12,7 +12,9 @@
           [formControl]="username"
           required
         />
-        <mat-error *ngIf="username.invalid">{{ getUsernameError() }}</mat-error>
+        @if (username.invalid) {
+          <mat-error>{{ getUsernameError() }}</mat-error>
+        }
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
@@ -24,10 +26,16 @@
           [formControl]="password"
           required
         />
-        <mat-error *ngIf="password.invalid">{{ getPasswordError() }}</mat-error>
+        @if (password.invalid) {
+          <mat-error>{{ getPasswordError() }}</mat-error>
+        }
       </mat-form-field>
       <button mat-flat-button color="primary" [disabled]="isLoading">
-        {{ isLoading ? "Loading..." : "Login" }}
+        @if (isLoading) {
+          Loading...
+        } @else {
+          Log in
+        }
       </button>
     </form>
   </div>

@@ -12,9 +12,9 @@
           [formControl]="username"
           required
         />
-        <mat-error *ngIf="username.invalid">{{
-          getUsernameError()
-        }}</mat-error>
+        @if (username.invalid) {
+          <mat-error>{{ getUsernameError() }}</mat-error>
+        }
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
@@ -26,9 +26,9 @@
           [formControl]="email"
           required
         />
-        <mat-error *ngIf="email.invalid">{{
-          getEmailError()
-        }}</mat-error>
+        @if (email.invalid) {
+          <mat-error>{{ getEmailError() }}</mat-error>
+        }
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
@@ -40,9 +40,9 @@
           [formControl]="password"
           required
         />
-        <mat-error *ngIf="password.invalid">{{
-          getPasswordError()
-        }}</mat-error>
+        @if (password.invalid) {
+          <mat-error>{{ getPasswordError() }}</mat-error>
+        }
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Repeat password</mat-label>
@@ -54,12 +54,16 @@
           [formControl]="repeatPassword"
           required
         />
-        <mat-error *ngIf="repeatPassword.invalid">{{
-          getRepeatPasswordError()
-        }}</mat-error>
+        @if (repeatPassword.invalid) {
+          <mat-error>{{ getRepeatPasswordError() }}</mat-error>
+        }
       </mat-form-field>
       <button mat-flat-button color="primary" [disabled]="isLoading">
-        {{ isLoading ? "Loading..." : "Register" }}
+        @if (isLoading) {
+          Loading...
+        } @else {
+          Register
+        }
       </button>
     </form>
   </div>

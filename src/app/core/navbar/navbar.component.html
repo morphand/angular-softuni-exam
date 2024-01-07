@@ -4,15 +4,12 @@
     <li><a routerLink="/catalog">Catalog</a></li>
   </ul>
   <ul class="right">
-    <!-- Logged out navigation -->
-    <ng-template [ngIf]="!isUserLoggedIn" [ngIfElse]="loggedInNavigation">
+    @if (!isUserLoggedIn) {
       <li><a routerLink="/login">Login</a></li>
       <li><a routerLink="/register">Register</a></li>
-    </ng-template>
-    <!-- Logged in navigation -->
-    <ng-template #loggedInNavigation>
+    } @else {
       <li><a routerLink="/profile">Profile</a></li>
       <li><a routerLink="/logout">Logout</a></li>
-    </ng-template>
+    }
   </ul>
 </nav>

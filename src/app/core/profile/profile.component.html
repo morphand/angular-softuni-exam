@@ -2,62 +2,68 @@
   <div class="profile">
     <div class="profile-stats">
       <h3>{{ username }}</h3>
-      <p *ngIf="rentedCars">
-        Total cars rented: {{ rentedCars.length }}
-      </p>
-      <p *ngIf="!rentedCars">You have not rented any cars yet.</p>
+      @if (rentedCars) {
+        <p>Total cars rented: {{ rentedCars.length }}</p>
+      } @else {
+        <p>You have not rented any cars yet.</p>
+      }
     </div>
-    <div class="profile-history" *ngIf="rentedCars">
-      <table
-        mat-table
-        [bgColor]="'accent'"
-        [dataSource]="rentedCars"
-        class="mat-elevation-z8"
-      >
-        <ng-container matColumnDef="model">
-          <th mat-header-cell *matHeaderCellDef>Model</th>
-          <td mat-cell *matCellDef="let element">{{ element.model }}</td>
-        </ng-container>
+    @if (rentedCars) {
+      <div class="profile-history">
+        <table
+          mat-table
+          [bgColor]="'accent'"
+          [dataSource]="rentedCars"
+          class="mat-elevation-z8"
+        >
+          <ng-container matColumnDef="model">
+            <th mat-header-cell *matHeaderCellDef>Model</th>
+            <td mat-cell *matCellDef="let element">{{ element.model }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="madeIn">
-          <th mat-header-cell *matHeaderCellDef>Year</th>
-          <td mat-cell *matCellDef="let element">{{ element.madeIn }}</td>
-        </ng-container>
+          <ng-container matColumnDef="madeIn">
+            <th mat-header-cell *matHeaderCellDef>Year</th>
+            <td mat-cell *matCellDef="let element">{{ element.madeIn }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="fuel">
-          <th mat-header-cell *matHeaderCellDef>Fuel</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.powertrain.fuel }}
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="fuel">
+            <th mat-header-cell *matHeaderCellDef>Fuel</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.powertrain.fuel }}
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="sizeInL">
-          <th mat-header-cell *matHeaderCellDef>Engine size</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.powertrain.sizeInL }}L
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="sizeInL">
+            <th mat-header-cell *matHeaderCellDef>Engine size</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.powertrain.sizeInL }}L
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="powerOutputInHp">
-          <th mat-header-cell *matHeaderCellDef>Power</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.powertrain.powerOutputInKw }}kW /
-            {{ element.powertrain.powerOutputInHp }} HP
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="powerOutputInHp">
+            <th mat-header-cell *matHeaderCellDef>Power</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.powertrain.powerOutputInKw }}kW /
+              {{ element.powertrain.powerOutputInHp }} HP
+            </td>
+          </ng-container>
 
-        <ng-container matColumnDef="link">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element">
-            <button [routerLink]="['/catalog', element._id]" mat-stroked-button>
-              Go to car page
-            </button>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="link">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                [routerLink]="['/catalog', element._id]"
+                mat-stroked-button
+              >
+                Go to car page
+              </button>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
-    </div>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    }
   </div>
 </section>
