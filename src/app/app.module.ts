@@ -29,7 +29,7 @@ import { httpInterceptorProviders } from './app.interceptors';
     SharedModule,
     AuthModule,
     BrowserAnimationsModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() , connectInZone: true}),
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
