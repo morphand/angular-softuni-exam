@@ -16,7 +16,7 @@ import { AuthService } from 'src/app/auth/auth.service';
   imports: [CommonModule, MatTableModule, RouterLink, MatButtonModule],
 })
 export class ProfileComponent implements OnInit {
-  username: string = '';
+  username: string | null = '';
   rentedCars: Car[] = [];
   displayedColumns: string[] = [
     'model',
@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
   ];
   constructor(
     private profileService: ProfileService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +38,6 @@ export class ProfileComponent implements OnInit {
       },
       error: (err) => console.error(err),
     });
-    this.username = this.authService.getUsername() as string;
+    this.username = this.authService.getUsername();
   }
 }
