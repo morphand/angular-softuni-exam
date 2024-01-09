@@ -7,9 +7,10 @@ import { Observable } from 'rxjs';
 import { logout } from '../auth.actions';
 
 @Component({
-  selector: 'app-logout',
-  templateUrl: './logout.component.html',
-  styleUrls: ['./logout.component.scss'],
+    selector: 'app-logout',
+    templateUrl: './logout.component.html',
+    styleUrls: ['./logout.component.scss'],
+    standalone: true,
 })
 export class LogoutComponent implements OnInit {
   auth$: Observable<string>;

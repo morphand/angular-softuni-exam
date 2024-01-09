@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { ContactFormComponent } from '../../shared/contact-form/contact-form.component';
+import { MatButtonModule } from '@angular/material/button';
 
 const slideUp = trigger('slideUp', [
   transition(':enter', [
@@ -27,9 +29,11 @@ const slideDown = trigger('slideDown', [
 ]);
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  animations: [slideUp, slideLeft, slideDown],
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    animations: [slideUp, slideLeft, slideDown],
+    standalone: true,
+    imports: [MatButtonModule, ContactFormComponent],
 })
 export class HomeComponent {}
