@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import {
   API_URL,
@@ -12,7 +12,9 @@ import {
   providedIn: 'root',
 })
 export class CatalogService {
-  constructor(private http: HttpClient) {}
+  private http: HttpClient = inject(HttpClient);
+
+  constructor() {}
 
   getCatalog() {
     return this.http.get<CatalogResult>(`${API_URL}${CATALOG_ENDPOINT}`);
@@ -20,7 +22,7 @@ export class CatalogService {
 
   getCarById(carId: string) {
     return this.http.get<SingleCarResult>(
-      `${API_URL}${CATALOG_SINGLE_CAR_ENDPOINT}${carId}`
+      `${API_URL}${CATALOG_SINGLE_CAR_ENDPOINT}${carId}`,
     );
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgIf } from '@angular/common';
 import {
   FormsModule,
@@ -37,6 +37,10 @@ import { Router } from '@angular/router';
   ],
 })
 export class RegisterComponent {
+  private authService: AuthService = inject(AuthService);
+  private router: Router = inject(Router);
+  private matSnackBar: MatSnackBar = inject(MatSnackBar);
+
   passwordValidators = [
     Validators.required,
     Validators.minLength(PASSWORD_MIN_LENGTH),
@@ -52,11 +56,7 @@ export class RegisterComponent {
   email = new FormControl('', [Validators.required, Validators.email]);
   isLoading: boolean = false;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-    private matSnackBar: MatSnackBar
-  ) {}
+  constructor() {}
 
   getEmailError() {
     if (this.email.hasError('required')) {
@@ -165,7 +165,7 @@ export class RegisterComponent {
           this.username.value,
           this.password.value,
           this.repeatPassword.value,
-          this.email.value
+          this.email.value,
         )
         .subscribe({
           next: this.registerHandler.bind(this),

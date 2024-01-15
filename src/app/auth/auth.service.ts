@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import {
   API_URL,
@@ -11,7 +11,9 @@ import {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  private http: HttpClient = inject(HttpClient);
+
+  constructor() {}
 
   requestLogin(username: String | null, password: String | null) {
     return this.http.post<LoginResult>(`${API_URL}${LOGIN_ENDPOINT}`, {
@@ -60,7 +62,7 @@ export class AuthService {
     username: String | null,
     password: String | null,
     repeatPassword: String | null,
-    email: String | null
+    email: String | null,
   ) {
     return this.http.post<RegisterResult>(`${API_URL}${REGISTER_ENDPOINT}`, {
       username,

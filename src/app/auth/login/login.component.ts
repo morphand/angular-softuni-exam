@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { NgIf } from '@angular/common';
 import {
   FormsModule,
@@ -35,19 +35,19 @@ import { login } from '../auth.actions';
   ],
 })
 export class LoginComponent implements OnInit {
+  private authService: AuthService = inject(AuthService);
+  private store: Store<{ auth: string }> = inject(Store);
+  private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private matSnackBar: MatSnackBar = inject(MatSnackBar);
+
   username = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
   isLoading: boolean = false;
   auth$: Observable<string>;
   redirectedFromCarId: Car['_id'] | null = null;
 
-  constructor(
-    private authService: AuthService,
-    private store: Store<{ auth: string }>,
-    private router: Router,
-    private route: ActivatedRoute,
-    private matSnackBar: MatSnackBar
-  ) {
+  constructor() {
     this.auth$ = this.store.select('auth');
   }
 

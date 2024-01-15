@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -30,6 +30,11 @@ const fadeIn = trigger('fadeIn', [enterTransition]);
   animations: [fadeIn],
 })
 export class CatalogDetailsComponent implements OnInit {
+  private catalogService: CatalogService = inject(CatalogService);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private router: Router = inject(Router);
+  private store: Store<{ auth: string }> = inject(Store);
+
   auth$: Observable<string>;
   isUserLoggedIn: boolean = false;
   car: Car | null = null;
@@ -37,12 +42,7 @@ export class CatalogDetailsComponent implements OnInit {
   carId: string = '';
   secondaryButtonsVisible: boolean = false;
 
-  constructor(
-    private catalogService: CatalogService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private store: Store<{ auth: string }>
-  ) {
+  constructor() {
     this.auth$ = this.store.select('auth');
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -16,6 +16,9 @@ import { AuthService } from 'src/app/auth/auth.service';
   imports: [CommonModule, MatTableModule, RouterLink, MatButtonModule],
 })
 export class ProfileComponent implements OnInit {
+  private profileService: ProfileService = inject(ProfileService);
+  private authService: AuthService = inject(AuthService);
+
   username: string | null = '';
   rentedCars: Car[] = [];
   displayedColumns: string[] = [
@@ -26,10 +29,8 @@ export class ProfileComponent implements OnInit {
     'powerOutputInHp',
     'link',
   ];
-  constructor(
-    private profileService: ProfileService,
-    private authService: AuthService,
-  ) {}
+
+  constructor() {}
 
   ngOnInit(): void {
     this.profileService.getProfile().subscribe({

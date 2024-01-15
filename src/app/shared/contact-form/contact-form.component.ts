@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import {
   FormControl,
@@ -28,10 +28,12 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
   ],
 })
 export class ContactFormComponent {
+  private matSnackBar: MatSnackBar = inject(MatSnackBar);
+
   email = new FormControl('', [Validators.required, Validators.email]);
   message = new FormControl('', [Validators.required]);
 
-  constructor(private matSnackBar: MatSnackBar) {}
+  constructor() {}
 
   getEmailError() {
     if (this.email.hasError('required')) {

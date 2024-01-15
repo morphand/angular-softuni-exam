@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -16,9 +16,12 @@ import { API_URL } from 'src/utils/constants';
   imports: [RouterModule, MatCardModule, CommonModule, MatButtonModule],
 })
 export class CatalogComponent implements OnInit {
+  private catalogService: CatalogService = inject(CatalogService);
+
   cars: Car[] = [];
   API_URL = API_URL;
-  constructor(private catalogService: CatalogService) {}
+
+  constructor() {}
 
   ngOnInit(): void {
     this.catalogService.getCatalog().subscribe({
